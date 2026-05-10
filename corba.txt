@@ -197,3 +197,4 @@ module calcModule {
  idlj -fall calculator.idl
 pkill orbd
  orbd -ORBInitialPort 2000
+-ORBInitialPort 2000 -ORBInitialHost localhost
