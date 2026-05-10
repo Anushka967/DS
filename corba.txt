@@ -190,3 +190,10 @@ module calcModule {
         double div(in double a, in double b);
     };
 };
+
+
+
+//commands
+ idlj -fall calculator.idl
+pkill orbd
+ orbd -ORBInitialPort 2000
