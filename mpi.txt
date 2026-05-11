@@ -105,9 +105,9 @@ public class Mpi{
 //tar -xvzf mpj-v0_44.tar.gz
 //sudo mv mpj-v0_44 /opt/mpj
 //ls /opt/mpj/lib
-// YOu can see mpi file in ls:  mpj.jar
+// You can see mpi file in ls:  mpj.jar
 
-//Set env. variables:
+//Set env. variables:  nano ~/.bashrc
 //export MPJ_HOME=/opt/mpj
 //export PATH=$PATH:$MPJ_HOME/bin
 
