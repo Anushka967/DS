@@ -99,8 +99,24 @@ public class Mpi{
     }
 }
 
+
+//cd Downloads
+//wget https://downloads.sourceforge.net/project/mpjexpress/releases/mpj-v0_44.tar.gz
+//tar -xvzf mpj-v0_44.tar.gz
+//sudo mv mpj-v0_44 /opt/mpj
+//ls /opt/mpj/lib
+// YOu can see mpi file in ls:  mpj.jar
+
+//Set env. variables:
 //export MPJ_HOME=/opt/mpj
 //export PATH=$PATH:$MPJ_HOME/bin
+
+ctrl + o
+Enter
+ctrl + X
+
+//Reload : source ~/.bashrc
+
 //javac -cp /opt/mpj/lib/mpj.jar MPISum.java
 //mpjrun.sh -np 4 -cp . MPISum
 
