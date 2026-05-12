@@ -199,5 +199,4 @@ pkill orbd
  orbd -ORBInitialPort 2000
 -ORBInitialPort 2000 -ORBInitialHost localhost
 
-
-// compileon terminal : javac *.java calcModule/*.java
+// javac *.java calcModule/*.java
