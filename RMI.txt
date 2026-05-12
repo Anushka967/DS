@@ -1,0 +1,131 @@
+//Server.java
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class Server {
+
+    public static void main(String[] args) {
+        try {
+            // Create object
+            CalculatorImpl obj = new CalculatorImpl();
+
+            // Start registry (on port 1099)
+            Registry registry = LocateRegistry.createRegistry(1099);
+
+            // Bind object
+            registry.rebind("CalculatorService", obj);
+
+            System.out.println("Server is ready...");
+
+        } catch (Exception e) {
+            System.out.println("Server error: " + e);
+        }
+    }
+}
+
+
+
+//Client.java
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
+
+public class Client {
+
+    public static void main(String[] args) {
+        try {
+            // Connect to registry
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+
+            // Lookup remote object
+            Calculator calc = (Calculator) registry.lookup("CalculatorService");
+
+            Scanner sc = new Scanner(System.in);
+
+            while (true) {
+                System.out.println("\n1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Exit");
+                System.out.print("Enter choice: ");
+                int choice = sc.nextInt();
+
+                if (choice == 5) break;
+
+                System.out.print("Enter first number: ");
+                double x = sc.nextDouble();
+
+                System.out.print("Enter second number: ");
+                double y = sc.nextDouble();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Result: " + calc.add(x, y));
+                        break;
+                    case 2:
+                        System.out.println("Result: " + calc.subtract(x, y));
+                        break;
+                    case 3:
+                        System.out.println("Result: " + calc.multiply(x, y));
+                        break;
+                    case 4:
+                        System.out.println("Result: " + calc.divide(x, y));
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                }
+            }
+
+            sc.close();
+
+        } catch (Exception e) {
+            System.out.println("Client error: " + e);
+        }
+    }
+}
+
+//Calculator.java
+
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface Calculator extends Remote {
+
+    double add(double x, double y) throws RemoteException;
+
+    double subtract(double x, double y) throws RemoteException;
+
+    double multiply(double x, double y) throws RemoteException;
+
+    double divide(double x, double y) throws RemoteException;
+}
+
+//CalculatorImpl.java
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
+
+public class CalculatorImpl extends UnicastRemoteObject implements Calculator {
+
+    protected CalculatorImpl() throws RemoteException {
+        super();
+    }
+
+    public double add(double x, double y) throws RemoteException {
+        return x + y;
+    }
+
+    public double subtract(double x, double y) throws RemoteException {
+        return x - y;
+    }
+
+    public double multiply(double x, double y) throws RemoteException {
+        return x * y;
+    }
+
+    public double divide(double x, double y) throws RemoteException {
+        if (y == 0) {
+            return 0;
+        }
+        return x / y;
+    }
+}
+
+//java Client
